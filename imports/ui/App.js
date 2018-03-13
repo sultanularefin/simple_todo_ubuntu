@@ -199,6 +199,8 @@ export default withTracker(() => {
 
 
     var ourTask= Tasks.find({},{sort:{createdAt:-1}}).fetch();
+
+    var taskUnsorted =Tasks.find({}).fetch();
     var ourIncompleteCount= Tasks.find({ checked: { $ne: true } }).count();
 
     // checked not equal to true i.e. checked is false; checked means complete.
@@ -208,26 +210,36 @@ export default withTracker(() => {
 
 
     // console.log("ourTask: ");
-    //
+    // //
     // console.log(ourTask);
 
-    console.log("ourIncompleteCount: ");
+    // console.log("taskUnsorted: ");
+    // console.log(taskUnsorted);
 
-    console.log(ourIncompleteCount);
+
+    // console.log("ourIncompleteCount: ");
+    //
+    // console.log(ourIncompleteCount);
     //
     // console.log("ourCurrentUser: ");
     // console.log(ourCurrentUser);
 
 
 
-
-
-
-
-
     return {
-        tasks: Tasks.find({}, { sort: { createdAt: -1 } }).fetch(),
-        incompleteCount: Tasks.find({ checked: { $ne: true } }).count(),
-        currentUser: Meteor.user(),
+        tasks: ourTask,
+        incompleteCount: ourIncompleteCount,
+        currentUser: ourCurrentUser,
     };
+
+
+
+
+
+
+    // return {
+    //     tasks: Tasks.find({}, { sort: { createdAt: -1 } }).fetch(),
+    //     incompleteCount: Tasks.find({ checked: { $ne: true } }).count(),
+    //     currentUser: Meteor.user(),
+    // };
 })(App);
